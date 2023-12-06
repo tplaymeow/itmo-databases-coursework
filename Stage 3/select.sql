@@ -1,5 +1,5 @@
 -- Выборка превьюх для списка доступных проектов
-select
+explain analyse select
     "PROJECT".identifier,
     "PROJECT".name,
     "USER".username,
@@ -10,7 +10,7 @@ right join "PROJECT" on "PROJECT".identifier = "USER_PROJECT_PERMISSION".project
 where "USER".username = 'tplaymeow';
 
 -- Выборка превьюх для списка активных проектов
-select
+explain analyse select
     "PROJECT".identifier,
     "PROJECT".name,
     "USER".username,
@@ -23,18 +23,18 @@ right join "PROJECT" on "PROJECT".identifier = "SCENE".project_id
 where "USER".username = 'tplaymeow';
 
 -- Выборка всех текстов для сцены
-select "CHARACTER".name, "SCENE_TEXT_CONTENT".text
+explain analyse select "CHARACTER".name, "SCENE_TEXT_CONTENT".text
 from "SCENE_TEXT_CONTENT"
 right join "CHARACTER" on "CHARACTER".identifier = "SCENE_TEXT_CONTENT".character_id
 where "SCENE_TEXT_CONTENT".scene_id = 6;
 
 -- Выборка всех действий для сцены
-select *
+explain analyse select *
 from "SCENE_ACTION"
 where "SCENE_ACTION".scene_id = 6;
 
 -- Выборка всех персонажей для сцены
-select "CHARACTER".name, "CHARACTER".theme, "CHARACTER_APPEARANCE".resource_id
+explain analyse select "CHARACTER".name, "CHARACTER".theme, "CHARACTER_APPEARANCE".resource_id
 from "SCENE_CHARACTER_APPEARANCE"
 right join "CHARACTER_APPEARANCE" on "CHARACTER_APPEARANCE".identifier = "SCENE_CHARACTER_APPEARANCE".character_appearance_id
 right join "CHARACTER" on "CHARACTER".identifier = "CHARACTER_APPEARANCE".character_id
